@@ -54,7 +54,20 @@ body.light .card p,body.light .hero p,body.light .page-header p,body.light .info
 @keyframes spin{to{transform:rotate(360deg)}}@keyframes counter{to{transform:rotate(-360deg)}}
 .country-card{cursor:pointer}.country-card:hover{transform:translateY(-7px)}
 .brand-tagline{letter-spacing:2px;color:var(--cyan);font-size:12px;margin-top:-10px;margin-bottom:12px;text-transform:uppercase;}
+
+.site-logo{
+  width: clamp(72px, 12vw, 130px);
+  height: clamp(72px, 12vw, 130px);
+  object-fit: cover;
+  border-radius: 24px;
+  display: block;
+  margin: 0 auto 14px;
+  box-shadow: 0 0 28px rgba(0,220,255,.45), 0 0 70px rgba(110,70,255,.22);
+  border: 1px solid rgba(255,255,255,.18);
+}
+.brand-logo-wrap{text-align:center;margin:10px auto 18px}
 </style>
+<link rel="icon" type="image/png" href="explore-with-anmol-logo.png">
 </head>
 <body>
 <aside class="sidebar">
@@ -102,6 +115,7 @@ body.light .card p,body.light .hero p,body.light .page-header p,body.light .info
 <div id="home" class="page active">
 <section class="hero">
 <div class="hero-earth">🌍</div>
+<div class="brand-logo-wrap"><img class="site-logo" src="explore-with-anmol-logo.png" alt="Explore with Anmol logo"></div>
 <h1>EXPLORE<br>WORLD</h1>
 <p>One interactive universe for learning about Space, Earth, Science, Mathematics, Grammar, History, Technology, Vehicles, Countries and the endless ideas that shape our world.</p>
 <div class="stats">
