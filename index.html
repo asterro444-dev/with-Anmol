@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore with Anmol 🌍</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#030611;--panel:#0b1224;--cyan:#00eaff;--purple:#9d5cff;--muted:#9aa9c4}
+body{background:var(--bg);color:white;font-family:Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(circle at 10% 10%,#123a6c,transparent 30%),radial-gradient(circle at 90% 80%,#45145e,transparent 30%)}
+body:after{content:"";position:fixed;inset:0;z-index:-2;opacity:.12;background-image:linear-gradient(#00eaff 1px,transparent 1px),linear-gradient(90deg,#00eaff 1px,transparent 1px);background-size:65px 65px;transform:perspective(500px) rotateX(65deg) scale(2);animation:grid 15s linear infinite}
+@keyframes grid{to{background-position:0 650px}}
+.layout{display:flex;min-height:100vh}.sidebar{position:fixed;inset:0 auto 0 0;width:245px;padding:22px 14px;background:#030711dd;backdrop-filter:blur(20px);border-right:1px solid #ffffff18;z-index:20;overflow-y:auto}.logo{font-size:20px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,var(--cyan),white,var(--purple));-webkit-background-clip:text;color:transparent;margin:8px 12px}.subtitle{font-size:11px;color:var(--muted);margin:0 12px 20px}.nav button{display:block;width:100%;padding:12px 14px;margin:5px 0;border-radius:12px;border:1px solid transparent;background:transparent;color:#dce5f4;text-align:left;cursor:pointer;transition:.3s}.nav button:hover,.nav button.active{background:#00eaff12;border-color:#00eaff55;color:white}.nav button span{margin-right:9px;font-size:18px}.main{margin-left:245px;width:calc(100% - 245px)}.topbar{height:75px;display:flex;align-items:center;gap:15px;padding:12px 28px;position:sticky;top:0;z-index:10;background:#030611cc;backdrop-filter:blur(20px);border-bottom:1px solid #ffffff15}.search{flex:1;max-width:700px;display:flex;border-radius:30px;overflow:hidden;background:#ffffff08;border:1px solid #ffffff20}.search input{flex:1;padding:13px 20px;background:transparent;border:none;outline:none;color:white}.search button{border:none;padding:0 22px;background:var(--cyan);cursor:pointer}.top-btn{padding:10px 15px;border-radius:20px;border:1px solid #ffffff20;background:#ffffff08;color:white;cursor:pointer}.content{padding:30px}.page{display:none;animation:open .5s ease}.page.active{display:block}@keyframes open{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}.hero{min-height:350px;padding:42px;border-radius:25px;position:relative;overflow:hidden;background:linear-gradient(110deg,#081a36,#080d20cc);border:1px solid #ffffff20}.hero h1,.page-header h1{font-size:clamp(36px,6vw,72px);background:linear-gradient(90deg,var(--cyan),white,var(--purple));-webkit-background-clip:text;color:transparent}.hero p,.page-header p{max-width:650px;margin-top:15px;color:#b9c5d9;line-height:1.8}.hero-earth{position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:190px;filter:drop-shadow(0 0 35px #00aaff);animation:float 5s ease-in-out infinite}@keyframes float{50%{transform:translateY(-55%) rotate(8deg)}}.stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:25px}.stat{padding:12px 18px;border-radius:14px;background:#ffffff0a;border:1px solid #ffffff18}.stat strong{display:block;font-size:20px;color:var(--cyan)}.stat small{color:var(--muted)}.section-title{display:flex;justify-content:space-between;align-items:center;margin:30px 0 15px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}.card{padding:22px;border-radius:20px;background:#ffffff08;border:1px solid #ffffff18;cursor:pointer;transition:.35s}.card:hover{transform:translateY(-8px);border-color:var(--cyan);box-shadow:0 0 30px #00eaff20}.icon{font-size:42px}.card h3{margin-top:12px}.card p{color:var(--muted);font-size:13px;line-height:1.7;margin-top:7px}.tag{display:inline-block;margin-top:12px;padding:5px 10px;border-radius:20px;background:#00eaff12;color:var(--cyan);font-size:11px}.page-header{padding:30px;margin-bottom:20px;border-radius:22px;background:#ffffff08;border:1px solid #ffffff18}.page-header h1{font-size:clamp(28px,5vw,60px)}.info-panel,.quiz-box,.calculator{padding:24px;border-radius:20px;background:#ffffff08;border:1px solid #ffffff18;margin-top:20px}.info-panel h2{color:var(--cyan);margin-bottom:10px}.info-panel p{color:#c5d0df;line-height:1.8}.formula{margin-top:15px;padding:15px;border-radius:12px;background:#020611;border:1px solid #00eaff33;color:#ffd166;font-family:monospace}.solar-system{height:520px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:25px;background:radial-gradient(circle,#092448,#020611 65%);border:1px solid #00eaff33}.sun{width:85px;height:85px;border-radius:50%;background:#ffb300;box-shadow:0 0 30px #ffb300,0 0 80px #ff7b00;z-index:5}.orbit{position:absolute;border:1px solid #ffffff30;border-radius:50%;animation:orbit linear infinite}.orbit span{position:absolute;left:0;top:50%;transform:translate(-50%,-50%);border-radius:50%;cursor:pointer}.orbit1{width:150px;height:150px;animation-duration:5s}.orbit2{width:240px;height:240px;animation-duration:8s}.orbit3{width:340px;height:340px;animation-duration:12s}.orbit4{width:450px;height:450px;animation-duration:17s}@keyframes orbit{to{transform:rotate(360deg)}}.mercury{width:12px;height:12px;background:#aaa}.venus{width:18px;height:18px;background:#d6a75b}.earth{width:20px;height:20px;background:#238cff}.mars{width:18px;height:18px;background:#d84c3c}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.tabs button,.option{padding:10px 15px;border-radius:20px;border:1px solid #ffffff20;background:#ffffff08;color:white;cursor:pointer}.tabs button:hover,.option:hover{background:var(--cyan);color:#001018}.calculator{max-width:370px}.display{width:100%;padding:18px;background:#020611;border:1px solid #ffffff18;border-radius:12px;color:white;font-size:22px;text-align:right}.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}.calc-grid button{padding:16px;border-radius:10px;border:1px solid #ffffff18;background:#ffffff08;color:white;cursor:pointer}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:#000b;backdrop-filter:blur(10px);z-index:100}.modal.show{display:flex}.modal-box{width:min(720px,100%);max-height:85vh;overflow:auto;padding:30px;border-radius:25px;background:#0b1224;border:1px solid #00eaff55}.modal-box h2{color:var(--cyan)}.modal-box p{margin-top:15px;color:#c7d1e1;line-height:1.8}.close{float:right;border:none;background:#ff3c6e;color:white;padding:8px 12px;border-radius:10px;cursor:pointer}
+@media(max-width:850px){.sidebar{width:70px;padding:15px 8px}.logo{font-size:0;text-align:center}.logo:after{content:"EW";font-size:20px}.subtitle{display:none}.nav button{font-size:0;text-align:center}.nav button span{margin:0;font-size:20px}.main{margin-left:70px;width:calc(100% - 70px)}.hero-earth{opacity:.3;font-size:150px}.content{padding:15px}}
+
+body.light{--bg:#eef5ff;--panel:#ffffff;color:#102033}
+body.light:before{opacity:.35}
+body.light .sidebar,body.light .topbar{background:#ffffffdd;color:#102033}
+body.light .card,body.light .hero,body.light .page-header,body.light .info-panel,body.light .quiz-box,body.light .calculator{background:#ffffffaa;border-color:#10203322}
+body.light .card p,body.light .hero p,body.light .page-header p,body.light .info-panel p{color:#42536a}
+.progress-wrap{height:8px;border-radius:20px;background:#ffffff18;margin-top:12px;overflow:hidden}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--purple));transition:width .4s}
+.badge{display:inline-block;padding:5px 9px;border-radius:10px;background:#9d5cff18;color:#d0b7ff;font-size:11px;margin:3px}
+
+.map-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+.continent-card{min-height:150px;padding:20px;border-radius:20px;background:linear-gradient(145deg,#0d2340,#11152d);border:1px solid #ffffff20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:50px;cursor:pointer;transition:.35s}
+.continent-card:hover{transform:translateY(-8px) scale(1.03);border-color:var(--cyan);box-shadow:0 0 30px #00eaff25}
+.continent-card b{font-size:18px}.continent-card small{font-size:11px;color:var(--muted)}
+.timeline{position:relative;max-width:850px;margin:auto;padding:10px 0}
+.timeline:before{content:"";position:absolute;left:20px;top:0;bottom:0;width:3px;background:linear-gradient(var(--cyan),var(--purple))}
+.timeline-item{margin:20px 0 20px 55px;padding:20px;border-radius:18px;background:#ffffff08;border:1px solid #ffffff18;position:relative}
+.timeline-item:before{content:"";position:absolute;left:-45px;top:25px;width:16px;height:16px;border-radius:50%;background:var(--cyan);box-shadow:0 0 15px var(--cyan)}
+.timeline-item b{color:var(--cyan);font-size:18px}.timeline-item p{color:#c5d0df;line-height:1.7;margin-top:8px}
+.achievement-card{position:relative;overflow:hidden}.achievement-card:after{content:"✦";position:absolute;right:15px;top:10px;font-size:60px;opacity:.06}
+
+.dashboard-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.dashboard-strip>div{padding:18px;border-radius:16px;background:#ffffff08;border:1px solid #ffffff18;text-align:center}
+.dashboard-strip b{display:block;font-size:26px;color:var(--cyan)}
+.dashboard-strip small{color:var(--muted)}
+.path-card{min-height:220px}
+.focus-mode .sidebar,.focus-mode .topbar{display:none}
+.focus-mode .main{margin-left:0;width:100%}
+.focus-mode .content{max-width:1100px;margin:auto}
+.favorite-card{border-color:#ffd16666!important}
+@media(max-width:650px){.dashboard-strip{grid-template-columns:repeat(2,1fr)}}
+
+.solar-orbit{height:500px;max-width:760px;margin:10px auto;position:relative;display:flex;align-items:center;justify-content:center}
+.sun{font-size:70px;z-index:3;filter:drop-shadow(0 0 25px #ffb300)}
+.orbit{position:absolute;border:1px solid #ffffff22;border-radius:50%;width:var(--size);height:var(--size);animation:spin 18s linear infinite}
+.o1{--size:120px}.o2{--size:180px}.o3{--size:245px}.o4{--size:310px}.o5{--size:380px}.o6{--size:455px}
+.planet{position:absolute;top:-15px;left:50%;font-size:28px;cursor:pointer;animation:counter 18s linear infinite}
+.p1{font-size:22px}.p2{font-size:25px}.p3{font-size:30px}.p4{font-size:28px}.p5{font-size:34px}.p6{font-size:36px}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes counter{to{transform:rotate(-360deg)}}
+.country-card{cursor:pointer}.country-card:hover{transform:translateY(-7px)}
+.brand-tagline{letter-spacing:2px;color:var(--cyan);font-size:12px;margin-top:-10px;margin-bottom:12px;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+<div class="logo">EXPLORE WORLD</div>
+<p class="subtitle">Ultimate Knowledge Universe</p>
+<nav class="nav">
+<button class="active" onclick="showPage('home',this)"><span>🏠</span> Home</button>
+<button onclick="showPage('space',this)"><span>🚀</span> Space</button>
+<button onclick="showPage('earth',this)"><span>🌍</span> Earth</button>
+<button onclick="showPage('countries',this)"><span>🗺️</span> Countries</button>
+<button onclick="showPage('maths',this)"><span>📐</span> Maths</button>
+<button onclick="showPage('grammar',this)"><span>📖</span> Grammar</button>
+<button onclick="showPage('science',this)"><span>🧪</span> Science</button>
+<button onclick="showPage('history',this)"><span>🏛️</span> History</button>
+<button onclick="showPage('cars',this)"><span>🚗</span> Cars</button>
+<button onclick="showPage('bikes',this)"><span>🏍️</span> Bikes</button>
+<button onclick="showPage('technology',this)"><span>💻</span> Technology</button>
+<button onclick="showPage('people',this)"><span>🧠</span> People</button>
+<button onclick="showPage('quiz',this)"><span>🏆</span> Quiz</button>
+<button onclick="showPage('calculator',this)"><span>🧮</span> Calculator</button>
+<button onclick="showPage('map',this)"><span>🗺️</span> World Map</button>
+<button onclick="showPage('achievements',this)"><span>🏅</span> Achievements</button>
+<button onclick="showPage('timeline',this)"><span>⏳</span> Timeline</button>
+<button onclick="showPage('learn',this)"><span>🎓</span> Learning Path</button>
+<button onclick="showPage('favorites',this)"><span>⭐</span> Saved Topics</button>
+<button onclick="showPage('tools',this)"><span>🛠️</span> Smart Tools</button>
+<button onclick="showPage('countriesExplorer',this)"><span>🌐</span> Country Explorer</button>
+<button onclick="showPage('solarSystem',this)"><span>🪐</span> Solar System</button>
+</nav>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<div class="search"><input id="searchInput" placeholder="Search planets, maths, countries, science..."><button onclick="searchKnowledge()">🔍</button></div>
+<button class="top-btn" onclick="openInfo('Explore with Anmol','Use the sidebar to explore knowledge zones. Search topics, earn XP, take quizzes and unlock your learning journey.')">❔</button>
+<button class="top-btn" onclick="toggleFocus()">🎯 Focus</button>
+<button class="top-btn" onclick="showPage('favorites')">⭐ Saved</button>
+<button class="top-btn" onclick="dailyFact()">💡 Daily Fact</button>
+<button class="top-btn" onclick="toggleTheme()">☀️</button>
+<button class="top-btn" onclick="showPage('quiz')">🏆 Quiz</button>
+</header>
+
+<section class="content">
+
+<div id="home" class="page active">
+<section class="hero">
+<div class="hero-earth">🌍</div>
+<h1>EXPLORE<br>WORLD</h1>
+<p>One interactive universe for learning about Space, Earth, Science, Mathematics, Grammar, History, Technology, Vehicles, Countries and the endless ideas that shape our world.</p>
+<div class="stats">
+<div class="stat"><strong>20+</strong><small>Knowledge Zones</small></div>
+<div class="stat"><strong>1000+</strong><small>Topics</small></div>
+<div class="stat"><strong>∞</strong><small>Learning Possibilities</small></div>
+<div class="stat"><strong id="xp">0 XP</strong><small>Your Progress</small></div>
+</div>
+</section>
+<div class="section-title"><h2>✨ Explore Knowledge</h2><span>Click any topic</span></div>
+<div class="dashboard-strip">
+<div><b id="dashXP">0</b><small>XP Earned</small></div>
+<div><b id="dashTopics">0</b><small>Topics Opened</small></div>
+<div><b id="dashQuiz">0</b><small>Quiz Answers</small></div>
+<div><b id="dashSaved">0</b><small>Saved Topics</small></div>
+</div>
+<div class="grid" style="margin-bottom:18px">
+<div class="card"><div class="icon">🔥</div><h3>Learning Streak</h3><p>Keep exploring every day and build your knowledge streak.</p><span class="tag" id="streak">Day 1</span></div>
+<div class="card"><div class="icon">💡</div><h3>Daily Fact</h3><p id="dailyFactText">Click Daily Fact to discover something new.</p><span class="tag">New idea</span></div>
+<div class="card"><div class="icon">🎯</div><h3>Knowledge Progress</h3><p>Complete quizzes and explore topics to earn XP.</p><span class="tag" id="homeXp">0 XP</span></div>
+</div>
+<div class="grid">
+<div class="card" onclick="showPage('space')"><div class="icon">🚀</div><h3>Space & Universe</h3><p>Planets, stars, galaxies, black holes, moons, comets and cosmic mysteries.</p><span class="tag">Explore →</span></div>
+<div class="card" onclick="showPage('earth')"><div class="icon">🌍</div><h3>Earth Explorer</h3><p>Continents, oceans, atmosphere, climate, mountains, rivers and Earth's layers.</p><span class="tag">Discover →</span></div>
+<div class="card" onclick="showPage('maths')"><div class="icon">📐</div><h3>Maths Academy</h3><p>From basic counting to algebra, geometry, trigonometry, probability and calculus.</p><span class="tag">Learn →</span></div>
+<div class="card" onclick="showPage('science')"><div class="icon">🧪</div><h3>Science</h3><p>Physics, Chemistry, Biology, human body, cells, energy and natural laws.</p><span class="tag">Discover →</span></div>
+<div class="card" onclick="showPage('cars')"><div class="icon">🚗</div><h3>Cars</h3><p>Engines, horsepower, torque, electric vehicles, safety and automotive technology.</p><span class="tag">Explore →</span></div>
+<div class="card" onclick="showPage('technology')"><div class="icon">💻</div><h3>Technology</h3><p>Artificial intelligence, computers, robotics, internet and future technology.</p><span class="tag">Discover →</span></div>
+</div>
+<div class="info-panel"><h2>🧠 Deep Knowledge Mode</h2><p>Every topic is designed to become a detailed learning page. You can add explanations, examples, diagrams, timelines, formulas, quizzes, facts and related topics.</p></div>
+<div class="section-title"><h2>🌟 More Knowledge Zones</h2><span>New</span></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Money & Economics','Economics studies how people, businesses and governments use limited resources. Key ideas include supply, demand, trade, saving, investment and opportunity cost.')"><div class="icon">💰</div><h3>Economics</h3><p>Money, markets, trade and everyday finance.</p></div>
+<div class="card" onclick="openInfo('Nature & Animals','Earth contains millions of species and ecosystems. Food chains show how energy moves between organisms, while biodiversity describes the variety of life.')"><div class="icon">🌿</div><h3>Nature & Animals</h3><p>Ecosystems, biodiversity and the natural world.</p></div>
+<div class="card" onclick="openInfo('Psychology','Psychology studies behaviour and mental processes. Topics include learning, memory, emotions, motivation and social behaviour.')"><div class="icon">🧠</div><h3>Psychology</h3><p>How people think, learn and behave.</p></div>
+<div class="card" onclick="openInfo('Inventions & Future','Innovation often combines science, engineering and creativity. Future technologies may change transport, communication, medicine and education.')"><div class="icon">🔮</div><h3>Future World</h3><p>Ideas, inventions and emerging technology.</p></div>
+</div>
+</div>
+
+<div id="space" class="page">
+<div class="page-header"><h1>🚀 SPACE & UNIVERSE</h1><p>The universe contains billions of galaxies, countless stars and mysteries that scientists are still trying to understand.</p></div>
+<div class="solar-system">
+<div class="sun" onclick="openInfo('The Sun','The Sun is a star at the centre of our Solar System. It is made mostly of hydrogen and helium. Nuclear fusion inside the Sun produces the energy that reaches Earth as light and heat.')"></div>
+<div class="orbit orbit1"><span class="mercury" onclick="openInfo('Mercury','Mercury is the smallest planet and the closest planet to the Sun. It has a rocky surface and extreme temperature changes.')"></span></div>
+<div class="orbit orbit2"><span class="venus" onclick="openInfo('Venus','Venus is similar in size to Earth but has a very thick atmosphere and a powerful greenhouse effect.')"></span></div>
+<div class="orbit orbit3"><span class="earth" onclick="openInfo('Earth','Earth is the third planet from the Sun and the only world currently known to support life.')"></span></div>
+<div class="orbit orbit4"><span class="mars" onclick="openInfo('Mars','Mars is called the Red Planet because iron minerals on its surface have oxidised.')"></span></div>
+</div>
+<div class="grid">
+<div class="card" onclick="openInfo('Black Holes','A black hole is an extremely dense region of space where gravity is so strong that anything crossing the event horizon cannot escape.')"><div class="icon">🕳️</div><h3>Black Holes</h3><p>Mysterious objects with extreme gravity.</p></div>
+<div class="card" onclick="openInfo('Galaxies','A galaxy is a huge collection of stars, planets, gas, dust and dark matter held together by gravity.')"><div class="icon">🌌</div><h3>Galaxies</h3><p>Giant cosmic systems containing billions of stars.</p></div>
+<div class="card" onclick="openInfo('Stars','Stars are giant balls of hot plasma that produce energy through nuclear fusion.')"><div class="icon">⭐</div><h3>Stars</h3><p>Cosmic engines producing light and energy.</p></div>
+<div class="card" onclick="openInfo('Moon','Earth’s Moon affects ocean tides and has a cratered rocky surface.')"><div class="icon">🌙</div><h3>Moons</h3><p>Natural satellites orbiting planets.</p></div>
+</div>
+</div>
+
+<div id="earth" class="page">
+<div class="page-header"><h1>🌍 EARTH EXPLORER</h1><p>Earth is a dynamic planet made of interacting systems: land, water, air and life.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Earth Crust','The crust is Earth’s outermost solid layer. Oceanic crust is generally thinner than continental crust.')"><div class="icon">🪨</div><h3>Crust</h3><p>The solid outer layer of Earth.</p></div>
+<div class="card" onclick="openInfo('Mantle','The mantle lies below the crust and is made of very hot rock that can slowly flow over geological time.')"><div class="icon">🔥</div><h3>Mantle</h3><p>A huge hot layer beneath the crust.</p></div>
+<div class="card" onclick="openInfo('Core','Earth has a hot metallic core. The outer core is liquid and helps create Earth’s magnetic field.')"><div class="icon">🌋</div><h3>Core</h3><p>The deepest part of our planet.</p></div>
+<div class="card" onclick="openInfo('Oceans','Oceans cover most of Earth’s surface and influence climate, weather and global ecosystems.')"><div class="icon">🌊</div><h3>Oceans</h3><p>Huge ecosystems covering most of the planet.</p></div>
+<div class="card" onclick="openInfo('Atmosphere','The atmosphere is a layer of gases around Earth that helps protect life and influences weather.')"><div class="icon">🌬️</div><h3>Atmosphere</h3><p>The gaseous envelope around Earth.</p></div>
+<div class="card" onclick="openInfo('Continents','Earth is commonly divided into seven continents: Asia, Africa, North America, South America, Antarctica, Europe and Australia.')"><div class="icon">🗺️</div><h3>Continents</h3><p>The major land regions of Earth.</p></div>
+</div>
+</div>
+
+<div id="countries" class="page">
+<div class="page-header"><h1>🗺️ COUNTRY EXPLORER</h1><p>Explore countries through geography, capitals, culture and history.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('India 🇮🇳','Capital: New Delhi. India is a country in South Asia with extraordinary geographical and cultural diversity.')"><div class="icon">🇮🇳</div><h3>India</h3><p>New Delhi • Asia</p></div>
+<div class="card" onclick="openInfo('Japan 🇯🇵','Capital: Tokyo. Japan is an island country in East Asia known for technology, history and culture.')"><div class="icon">🇯🇵</div><h3>Japan</h3><p>Tokyo • Asia</p></div>
+<div class="card" onclick="openInfo('United States 🇺🇸','Capital: Washington, D.C. The United States has diverse landscapes including mountains, plains, forests and deserts.')"><div class="icon">🇺🇸</div><h3>United States</h3><p>Washington, D.C. • North America</p></div>
+<div class="card" onclick="openInfo('Egypt 🇪🇬','Capital: Cairo. Egypt is famous for the Nile River and ancient Egyptian civilization.')"><div class="icon">🇪🇬</div><h3>Egypt</h3><p>Cairo • Africa</p></div>
+<div class="card" onclick="openInfo('Brazil 🇧🇷','Capital: Brasília. Brazil is the largest country in South America and contains a large part of the Amazon rainforest.')"><div class="icon">🇧🇷</div><h3>Brazil</h3><p>Brasília • South America</p></div>
+</div>
+</div>
+
+<div id="maths" class="page">
+<div class="page-header"><h1>📐 MATHS ACADEMY</h1><p>Learn mathematics step by step from basic arithmetic to advanced concepts.</p></div>
+<div class="tabs"><button onclick="mathLevel('basic')">Nursery–5</button><button onclick="mathLevel('middle')">6–8</button><button onclick="mathLevel('secondary')">9–10</button><button onclick="mathLevel('advanced')">11–12</button></div>
+<div id="mathContent" class="grid">
+<div class="card"><div class="icon">🔢</div><h3>Numbers</h3><p>Natural numbers, whole numbers, integers and place value form the foundation of mathematics.</p><div class="formula">5,482 = 5 thousands + 4 hundreds + 8 tens + 2 ones</div></div>
+<div class="card"><div class="icon">➕</div><h3>Basic Operations</h3><p>Addition, subtraction, multiplication and division are fundamental arithmetic operations.</p><div class="formula">25 + 17 = 42</div></div>
+<div class="card"><div class="icon">📏</div><h3>Area</h3><p>Area measures the surface covered by a two-dimensional shape.</p><div class="formula">Rectangle Area = Length × Breadth</div></div>
+</div>
+</div>
+
+<div id="grammar" class="page">
+<div class="page-header"><h1>📖 ENGLISH GRAMMAR</h1><p>Build strong English through grammar, examples and sentence structure.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Noun','A noun names a person, place, animal, object or idea. Examples: teacher, school, dog, book, honesty.')"><div class="icon">🔤</div><h3>Noun</h3><p>Names a person, place, thing or idea.</p></div>
+<div class="card" onclick="openInfo('Pronoun','A pronoun is used in place of a noun. Examples include he, she, it, they, we and you.')"><div class="icon">👤</div><h3>Pronoun</h3><p>Replaces or refers to a noun.</p></div>
+<div class="card" onclick="openInfo('Verb','A verb expresses an action, occurrence or state. Examples: run, think, write, is, become.')"><div class="icon">🏃</div><h3>Verb</h3><p>Shows action or state.</p></div>
+<div class="card" onclick="openInfo('Tenses','The three basic time categories are Present, Past and Future. Each can have Simple, Continuous, Perfect and Perfect Continuous forms.')"><div class="icon">⏳</div><h3>Tenses</h3><p>Shows when an action happens.</p></div>
+<div class="card" onclick="openInfo('Active and Passive Voice','Active: Ram writes a letter. Passive: A letter is written by Ram. The focus changes from the doer to the action or receiver.')"><div class="icon">🔄</div><h3>Voice</h3><p>Active and Passive Voice.</p></div>
+<div class="card" onclick="openInfo('Direct and Indirect Speech','Direct speech gives exact words. Indirect speech reports the meaning of what someone said.')"><div class="icon">💬</div><h3>Narration</h3><p>Direct and Indirect Speech.</p></div>
+</div>
+</div>
+
+<div id="science" class="page">
+<div class="page-header"><h1>🧪 SCIENCE EXPLORER</h1><p>Science helps us understand matter, energy, life and the laws of nature.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Physics','Physics studies matter, motion, forces, energy, space and time. Major areas include mechanics, thermodynamics, electricity, magnetism and optics.')"><div class="icon">⚡</div><h3>Physics</h3><p>Motion, force, energy and nature.</p></div>
+<div class="card" onclick="openInfo('Chemistry','Chemistry studies atoms, molecules, elements, compounds and chemical reactions.')"><div class="icon">⚗️</div><h3>Chemistry</h3><p>Atoms, molecules and reactions.</p></div>
+<div class="card" onclick="openInfo('Biology','Biology studies living organisms, cells, genetics, evolution, ecosystems and life processes.')"><div class="icon">🧬</div><h3>Biology</h3><p>Life and living organisms.</p></div>
+<div class="card" onclick="openInfo('Human Body','The human body contains organ systems such as the nervous, circulatory, respiratory, digestive and skeletal systems.')"><div class="icon">🫀</div><h3>Human Body</h3><p>Explore organs and body systems.</p></div>
+</div>
+</div>
+
+<div id="history" class="page">
+<div class="page-header"><h1>🏛️ HISTORY</h1><p>Discover civilizations, inventions and events that shaped humanity.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Ancient Civilizations','Important ancient civilizations include the Indus Valley Civilization, Ancient Egypt, Mesopotamia, Ancient China, Greece and Rome.')"><div class="icon">🏺</div><h3>Ancient Civilizations</h3><p>The foundations of organized society.</p></div>
+<div class="card" onclick="openInfo('Indian History','Indian history includes ancient civilizations, kingdoms, empires, cultural developments, colonial rule and the independence movement.')"><div class="icon">🇮🇳</div><h3>Indian History</h3><p>A long and diverse civilization.</p></div>
+<div class="card" onclick="openInfo('Inventions','Important inventions such as writing systems, the wheel, printing, electricity and computers changed human civilization.')"><div class="icon">💡</div><h3>Inventions</h3><p>Ideas that changed the world.</p></div>
+</div>
+</div>
+
+<div id="cars" class="page">
+<div class="page-header"><h1>🚗 CAR KNOWLEDGE</h1><p>Understand the engineering and technology behind automobiles.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Horsepower','Horsepower describes the rate at which an engine can perform work. It is commonly used to describe power output.')"><div class="icon">🏁</div><h3>Horsepower</h3><p>Engine power output.</p></div>
+<div class="card" onclick="openInfo('Torque','Torque is rotational force. It plays an important role in acceleration and moving heavy loads.')"><div class="icon">⚙️</div><h3>Torque</h3><p>Rotational force.</p></div>
+<div class="card" onclick="openInfo('Electric Vehicles','Electric vehicles use electric motors and batteries and are an important area of transportation technology.')"><div class="icon">🔋</div><h3>Electric Cars</h3><p>Cars powered by electric motors.</p></div>
+<div class="card" onclick="openInfo('Car Safety','Modern vehicle safety can include seat belts, airbags, braking systems, stability systems and driver assistance technologies.')"><div class="icon">🛡️</div><h3>Safety</h3><p>Technology designed to protect people.</p></div>
+</div>
+</div>
+
+<div id="bikes" class="page">
+<div class="page-header"><h1>🏍️ BIKE KNOWLEDGE</h1><p>Explore motorcycle design, engines and different categories of bikes.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Engine CC','CC means cubic centimetres and describes engine displacement. Engine size is one factor that influences engine characteristics.')"><div class="icon">🔧</div><h3>Engine CC</h3><p>Understanding engine displacement.</p></div>
+<div class="card" onclick="openInfo('Bike Types','Motorcycles include sport bikes, cruisers, adventure bikes, touring bikes, standard bikes and off-road motorcycles.')"><div class="icon">🏍️</div><h3>Bike Types</h3><p>Different bikes for different purposes.</p></div>
+<div class="card" onclick="openInfo('Motorcycle Braking','Motorcycles use braking systems to slow down and stop. Good control and proper safety equipment are important when riding.')"><div class="icon">🛞</div><h3>Braking</h3><p>How motorcycles slow down safely.</p></div>
+</div>
+</div>
+
+<div id="technology" class="page">
+<div class="page-header"><h1>💻 TECHNOLOGY</h1><p>Explore the tools and ideas transforming the modern world.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Artificial Intelligence','Artificial Intelligence refers to computer systems designed to perform tasks involving pattern recognition, learning, reasoning and decision-making.')"><div class="icon">🤖</div><h3>Artificial Intelligence</h3><p>Machines that process information and patterns.</p></div>
+<div class="card" onclick="openInfo('Robotics','Robotics combines mechanical engineering, electronics and software to create machines capable of performing tasks.')"><div class="icon">🦾</div><h3>Robotics</h3><p>Machines designed to perform tasks.</p></div>
+<div class="card" onclick="openInfo('Internet','The internet is a global network of interconnected computer networks that allows devices and systems to exchange information.')"><div class="icon">🌐</div><h3>Internet</h3><p>The global network.</p></div>
+<div class="card" onclick="openInfo('Programming','Programming involves writing instructions that computers can interpret and execute. Languages include Python, JavaScript, Java and many others.')"><div class="icon">💻</div><h3>Programming</h3><p>Giving instructions to computers.</p></div>
+</div>
+</div>
+
+<div id="people" class="page">
+<div class="page-header"><h1>🧠 FAMOUS PEOPLE</h1><p>Learn about people whose ideas and work influenced science, mathematics and society.</p></div>
+<div class="grid">
+<div class="card" onclick="openInfo('Albert Einstein','Albert Einstein was a physicist whose work had a major influence on modern physics, especially through theories of relativity.')"><div class="icon">🧠</div><h3>Albert Einstein</h3><p>Physics and relativity.</p></div>
+<div class="card" onclick="openInfo('A. P. J. Abdul Kalam','A. P. J. Abdul Kalam was an Indian aerospace scientist and former President of India who inspired generations of students.')"><div class="icon">🚀</div><h3>A. P. J. Abdul Kalam</h3><p>Science, aerospace and education.</p></div>
+<div class="card" onclick="openInfo('Srinivasa Ramanujan','Srinivasa Ramanujan was an Indian mathematician known for important contributions to number theory and mathematical analysis.')"><div class="icon">➗</div><h3>Srinivasa Ramanujan</h3><p>Mathematics and number theory.</p></div>
+</div>
+</div>
+
+<div id="quiz" class="page">
+<div class="page-header"><h1>🏆 KNOWLEDGE QUIZ</h1><p>Challenge yourself, earn XP and become a Knowledge Explorer!</p></div>
+<div class="quiz-box">
+<div class="tabs">
+<button onclick="startQuiz('all')">🌟 All Topics</button>
+<button onclick="startQuiz('space')">🚀 Space</button>
+<button onclick="startQuiz('science')">🧪 Science</button>
+<button onclick="startQuiz('maths')">📐 Maths</button>
+<button onclick="startQuiz('gk')">🌍 GK</button>
+<button onclick="startQuiz('history')">🏛️ History</button>
+</div>
+<div id="quizStats" style="color:#9aa9c4;margin-bottom:15px">Choose a category to start!</div>
+<div class="progress-wrap"><div class="progress-bar" id="quizProgress"></div></div>
+<div id="quizQuestion"><h2>🧠 Ready for a challenge?</h2><p style="margin-top:12px;color:#b9c5d9">Choose a category above and test your knowledge.</p></div>
+<div id="quizOptions" style="display:grid;gap:10px;margin-top:20px"></div>
+<div id="result" style="margin-top:18px;font-weight:bold"></div>
+<button id="nextQuiz" class="top-btn" style="display:none;margin-top:18px" onclick="nextQuizQuestion()">Next Question ➜</button>
+</div>
+</div>
+
+<div id="calculator" class="page">
+<div class="page-header"><h1>🧮 CALCULATOR</h1><p>Perform mathematical calculations.</p></div>
+<div class="calculator">
+<input id="display" class="display" readonly>
+<div class="calc-grid">
+<button onclick="clearCalc()">C</button><button onclick="add('(')">(</button><button onclick="add(')')">)</button><button onclick="add('/')">÷</button>
+<button onclick="add('7')">7</button><button onclick="add('8')">8</button><button onclick="add('9')">9</button><button onclick="add('*')">×</button>
+<button onclick="add('4')">4</button><button onclick="add('5')">5</button><button onclick="add('6')">6</button><button onclick="add('-')">−</button>
+<button onclick="add('1')">1</button><button onclick="add('2')">2</button><button onclick="add('3')">3</button><button onclick="add('+')">+</button>
+<button onclick="add('0')">0</button><button onclick="add('.')">.</button><button onclick="calculate()">=</button>
+</div>
+</div>
+</div>
+
+
+<div id="map" class="page">
+<div class="page-header"><h1>🗺️ INTERACTIVE WORLD MAP</h1><p>Explore continents and discover quick facts about different regions of our planet.</p></div>
+<div class="map-grid">
+<div class="continent-card" onclick="openInfo('Asia 🌏','Asia is the largest continent by area and population. It contains a huge variety of climates, cultures, languages and landscapes.')">🌏<b>Asia</b><small>Largest continent</small></div>
+<div class="continent-card" onclick="openInfo('Africa 🌍','Africa is known for its extraordinary biodiversity, deserts, savannas, forests and many different cultures.')">🌍<b>Africa</b><small>Rich biodiversity</small></div>
+<div class="continent-card" onclick="openInfo('Europe 🌍','Europe has a rich history and contains many countries with diverse languages, cultures and landscapes.')">🌍<b>Europe</b><small>History & culture</small></div>
+<div class="continent-card" onclick="openInfo('North America 🌎','North America contains diverse landscapes including Arctic regions, forests, plains, deserts and mountains.')">🌎<b>North America</b><small>Great diversity</small></div>
+<div class="continent-card" onclick="openInfo('South America 🌎','South America is home to the Amazon Basin and the Andes, one of the world’s major mountain systems.')">🌎<b>South America</b><small>Amazon & Andes</small></div>
+<div class="continent-card" onclick="openInfo('Australia & Oceania 🌏','Australia and the Pacific region contain unique ecosystems, islands and cultures.')">🌏<b>Oceania</b><small>Islands & wildlife</small></div>
+<div class="continent-card" onclick="openInfo('Antarctica ❄️','Antarctica is the coldest continent and is covered by a massive ice sheet.')">❄️<b>Antarctica</b><small>Frozen continent</small></div>
+</div>
+<div class="info-panel"><h2>🌐 Map Mode</h2><p>Tap a continent to open its knowledge card. This version is designed so a real interactive map can be connected later with country search, capitals, flags and geographic layers.</p></div>
+</div>
+
+<div id="achievements" class="page">
+<div class="page-header"><h1>🏅 ACHIEVEMENTS</h1><p>Learn more, explore more and unlock badges.</p></div>
+<div class="grid">
+<div class="card achievement-card"><div class="icon">🌱</div><h3>First Explorer</h3><p>Open your first knowledge topic.</p><span class="tag">Unlocked</span></div>
+<div class="card achievement-card"><div class="icon">🧠</div><h3>Quiz Starter</h3><p>Complete your first quiz question.</p><span class="tag">Earn XP</span></div>
+<div class="card achievement-card"><div class="icon">🚀</div><h3>Space Traveller</h3><p>Explore the Space section.</p><span class="tag">Explore</span></div>
+<div class="card achievement-card"><div class="icon">📚</div><h3>Knowledge Hunter</h3><p>Reach 100 XP.</p><span class="tag">100 XP</span></div>
+<div class="card achievement-card"><div class="icon">🏆</div><h3>Quiz Champion</h3><p>Get a perfect quiz score.</p><span class="tag">Perfect</span></div>
+<div class="card achievement-card"><div class="icon">🌌</div><h3>Universe Mind</h3><p>Explore space, science and technology.</p><span class="tag">Advanced</span></div>
+</div>
+</div>
+
+<div id="timeline" class="page">
+<div class="page-header"><h1>⏳ TIMELINE OF HUMAN KNOWLEDGE</h1><p>A simple journey through important developments in human history.</p></div>
+<div class="timeline">
+<div class="timeline-item"><b>🪨 Early Humans</b><p>Tools, fire and cooperation helped humans survive and develop.</p></div>
+<div class="timeline-item"><b>🏺 First Civilizations</b><p>Writing, agriculture, cities and organised societies emerged in different regions.</p></div>
+<div class="timeline-item"><b>🏛️ Classical Age</b><p>Philosophy, mathematics, engineering and political ideas developed in many ancient societies.</p></div>
+<div class="timeline-item"><b>🧭 Exploration & Invention</b><p>New navigation methods, scientific ideas and technologies changed human societies.</p></div>
+<div class="timeline-item"><b>⚙️ Industrial Revolution</b><p>Machines, factories and new transport systems transformed production and daily life.</p></div>
+<div class="timeline-item"><b>💻 Digital Age</b><p>Computers, the internet, smartphones and artificial intelligence transformed communication and information.</p></div>
+<div class="timeline-item"><b>🚀 Future</b><p>Humanity continues to explore space, biotechnology, robotics and new forms of energy.</p></div>
+</div>
+</div>
+
+
+<div id="learn" class="page">
+<div class="page-header"><h1>🎓 PERSONAL LEARNING PATH</h1><p>Choose a path and learn step-by-step from beginner to advanced.</p></div>
+<div class="grid">
+<div class="card path-card" onclick="openPath('Young Explorer',['Numbers & Patterns','Earth & Continents','Solar System','Basic Science','English Grammar','General Knowledge'])"><div class="icon">🌱</div><h3>Young Explorer</h3><p>Build strong foundations with curiosity and simple explanations.</p><span class="tag">Start Path →</span></div>
+<div class="card path-card" onclick="openPath('Science Explorer',['Matter & Energy','Cells & Life','Forces & Motion','Chemistry Basics','Space Science','Technology'])"><div class="icon">🧪</div><h3>Science Explorer</h3><p>Connect physics, chemistry, biology and astronomy.</p><span class="tag">Start Path →</span></div>
+<div class="card path-card" onclick="openPath('Maths Master',['Arithmetic','Fractions & Percentages','Algebra','Geometry','Trigonometry','Calculus'])"><div class="icon">📐</div><h3>Maths Master</h3><p>Progress from basic calculations to advanced mathematics.</p><span class="tag">Start Path →</span></div>
+<div class="card path-card" onclick="openPath('Future Builder',['Computers','Programming','AI','Robotics','Space Technology','Innovation'])"><div class="icon">🚀</div><h3>Future Builder</h3><p>Explore the technologies shaping tomorrow.</p><span class="tag">Start Path →</span></div>
+</div>
+<div class="info-panel"><h2>🧭 How to Learn</h2><p>Explore a topic → read the explanation → test yourself → earn XP → unlock achievements. This turns the website into a self-guided learning universe.</p></div>
+</div>
+
+<div id="favorites" class="page">
+<div class="page-header"><h1>⭐ SAVED TOPICS</h1><p>Keep important topics in one place for quick revision.</p></div>
+<div id="favoritesList" class="grid"></div>
+<div class="info-panel"><h2>💾 Your Library</h2><p>Save a topic from any information card using the ⭐ Save button in the knowledge popup.</p></div>
+</div>
+
+<div id="tools" class="page">
+<div class="page-header"><h1>🛠️ SMART LEARNING TOOLS</h1><p>Useful tools for learning, revision and exploration.</p></div>
+<div class="grid">
+<div class="card" onclick="showPage('calculator')"><div class="icon">🧮</div><h3>Calculator</h3><p>Perform everyday calculations.</p></div>
+<div class="card" onclick="openInfo('Unit Converter','Convert length, mass, temperature and more. A future upgrade can connect a full multi-unit converter.')"><div class="icon">📏</div><h3>Unit Converter</h3><p>Understand and convert measurements.</p></div>
+<div class="card" onclick="openInfo('Flashcards','Flashcards are a powerful revision method. Create a question on one side and the answer on the other, then test your memory.')"><div class="icon">🃏</div><h3>Flashcards</h3><p>Revise important facts quickly.</p></div>
+<div class="card" onclick="openInfo('Study Timer','Use focused study sessions with short breaks. A simple pattern is study, recall, review and rest.')"><div class="icon">⏱️</div><h3>Study Timer</h3><p>Build focused study sessions.</p></div>
+<div class="card" onclick="openInfo('Formula Bank','Keep important maths and science formulas together for quick revision.')"><div class="icon">📚</div><h3>Formula Bank</h3><p>Quick revision of formulas.</p></div>
+<div class="card" onclick="openInfo('Random Topic','When you do not know what to learn, choose a random topic and let curiosity lead the way.')"><div class="icon">🎲</div><h3>Random Topic</h3><p>Discover something unexpected.</p></div>
+</div>
+</div>
+
+<div id="countriesExplorer" class="page">
+<div class="page-header"><h1>🌐 COUNTRY EXPLORER</h1><p>Search countries and discover capitals, regions, languages, currencies, population, area, timezones and quick facts.</p></div>
+<div class="search" style="max-width:700px;margin:0 auto 22px"><input id="countrySearch" placeholder="Search India, Japan, France, Brazil..." oninput="filterCountries()"><button onclick="filterCountries()">🔍</button></div>
+<div id="countryGrid" class="grid"></div>
+</div>
+
+<div id="solarSystem" class="page">
+<div class="page-header"><h1>🪐 SOLAR SYSTEM EXPLORER</h1><p>Tap a planet to learn about its place in our cosmic neighbourhood.</p></div>
+<div class="solar-orbit">
+<div class="sun">☀️</div>
+<div class="orbit o1"><div class="planet p1" onclick="openInfo('Mercury','The smallest planet and the closest planet to the Sun.')">☿</div></div>
+<div class="orbit o2"><div class="planet p2" onclick="openInfo('Venus','A rocky planet with a very thick atmosphere and extremely high surface temperatures.')">♀</div></div>
+<div class="orbit o3"><div class="planet p3" onclick="openInfo('Earth','Our home planet, with liquid surface water and a rich variety of life.')">🌍</div></div>
+<div class="orbit o4"><div class="planet p4" onclick="openInfo('Mars','A cold desert world often called the Red Planet because of iron-rich dust on its surface.')">♂</div></div>
+<div class="orbit o5"><div class="planet p5" onclick="openInfo('Jupiter','The largest planet in the Solar System and a gas giant.')">♃</div></div>
+<div class="orbit o6"><div class="planet p6" onclick="openInfo('Saturn','A gas giant famous for its spectacular ring system.')">♄</div></div>
+</div>
+<div class="grid" style="margin-top:20px">
+<div class="card" onclick="openInfo('Uranus','An ice giant with a blue-green appearance and an unusual tilted rotation axis.')"><div class="icon">🔵</div><h3>Uranus</h3><p>Ice giant</p></div>
+<div class="card" onclick="openInfo('Neptune','A distant ice giant with powerful winds and a deep blue appearance.')"><div class="icon">🔷</div><h3>Neptune</h3><p>Distant ice giant</p></div>
+</div>
+</div>
+</section>
+</main>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<button class="close" onclick="closeInfo()">✕</button>
+<h2 id="modalTitle"></h2>
+<p id="modalText"></p>
+<div id="modalActions" style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+<button class="top-btn" onclick="saveCurrentTopic()">⭐ Save Topic</button>
+<button class="top-btn" onclick="addXP(5);closeInfo()">+5 XP</button>
+</div>
+</div>
+</div>
+
+<script>
+let xp=0;
+function showPage(id,button){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+if(button)button.classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+function openInfo(title,text){
+currentTopicTitle=title;
+openedTopics++;
+localStorage.setItem("exploreOpenedTopics",openedTopics);
+updateDashboard();
+document.getElementById("modalTitle").innerText=title;
+document.getElementById("modalText").innerText=text;
+document.getElementById("modal").classList.add("show");
+addXP(5);
+}
+function closeInfo(){document.getElementById("modal").classList.remove("show")}
+function addXP(amount){
+xp+=amount;
+document.getElementById("xp").innerText=xp+" XP";
+updateDashboard();
+let h=document.getElementById("homeXp"); if(h)h.innerText=xp+" XP";
+let streak=document.getElementById("streak"); if(streak)streak.innerText="Day "+Math.max(1,Math.floor(xp/25)+1);
+localStorage.setItem("exploreXP",xp);
+}
+
+const facts=[
+"Lightning can heat the air around it to extremely high temperatures for a very short time.",
+"Jupiter is the largest planet in our Solar System.",
+"Water can exist naturally as a solid, liquid and gas.",
+"The human brain uses electrical signals to communicate between nerve cells.",
+"Earth's atmosphere helps protect life and influences weather and climate.",
+"Some stars are so large that millions of Earths could fit inside them.",
+"Mathematics is used in science, engineering, architecture, finance and technology."
+];
+function dailyFact(){
+let fact=facts[Math.floor(Math.random()*facts.length)];
+let box=document.getElementById("dailyFactText"); if(box)box.innerText=fact;
+openInfo("💡 Daily Fact",fact);
+}
+function toggleTheme(){
+document.body.classList.toggle("light");
+localStorage.setItem("exploreTheme",document.body.classList.contains("light")?"light":"dark");
+}
+function loadSavedSettings(){
+let savedXP=Number(localStorage.getItem("exploreXP")||0);
+xp=savedXP;
+let theme=localStorage.getItem("exploreTheme");
+if(theme==="light")document.body.classList.add("light");
+let x=document.getElementById("xp"); if(x)x.innerText=xp+" XP";
+let h=document.getElementById("homeXp"); if(h)h.innerText=xp+" XP";
+}
+
+
+let currentTopicTitle="";
+let openedTopics=Number(localStorage.getItem("exploreOpenedTopics")||0);
+let answeredQuestions=Number(localStorage.getItem("exploreAnsweredQuestions")||0);
+let savedTopics=JSON.parse(localStorage.getItem("exploreSavedTopics")||"[]");
+
+function updateDashboard(){
+let a=document.getElementById("dashXP"); if(a)a.innerText=xp;
+let b=document.getElementById("dashTopics"); if(b)b.innerText=openedTopics;
+let c=document.getElementById("dashQuiz"); if(c)c.innerText=answeredQuestions;
+let d=document.getElementById("dashSaved"); if(d)d.innerText=savedTopics.length;
+}
+function saveCurrentTopic(){
+if(!currentTopicTitle)return;
+if(!savedTopics.includes(currentTopicTitle))savedTopics.push(currentTopicTitle);
+localStorage.setItem("exploreSavedTopics",JSON.stringify(savedTopics));
+updateDashboard();
+renderFavorites();
+document.getElementById("modalText").innerText+="\\n\\n⭐ Saved to your library!";
+}
+function renderFavorites(){
+let box=document.getElementById("favoritesList"); if(!box)return;
+if(!savedTopics.length){box.innerHTML='<div class="info-panel"><h2>No saved topics yet</h2><p>Open a topic and press ⭐ Save Topic to build your personal library.</p></div>';return}
+box.innerHTML=savedTopics.map((x,i)=>`<div class="card favorite-card"><div class="icon">⭐</div><h3>${x}</h3><p>Saved for quick revision.</p><button class="top-btn" onclick="removeFavorite(${i})">Remove</button></div>`).join("");
+}
+function removeFavorite(i){savedTopics.splice(i,1);localStorage.setItem("exploreSavedTopics",JSON.stringify(savedTopics));renderFavorites();updateDashboard()}
+function toggleFocus(){document.body.classList.toggle("focus-mode")}
+function openPath(name,steps){
+let text=name+" learning path:\\n\\n"+steps.map((s,i)=>(i+1)+". "+s).join("\\n");
+openInfo(name,text);
+}
+
+
+const countryData=[
+{name:"India",flag:"🇮🇳",continent:"Asia",region:"South Asia",capital:"New Delhi",language:"Hindi, English and many regional languages",currency:"Indian Rupee (₹)",population:"1.4+ billion",area:"3.28 million km²",timezone:"IST (UTC+5:30)",code:"+91",fact:"India is one of the world's most geographically and culturally diverse countries, with the Himalayas, deserts, forests, plains and long coastlines."},
+{name:"Japan",flag:"🇯🇵",continent:"Asia",region:"East Asia",capital:"Tokyo",language:"Japanese",currency:"Japanese Yen (¥)",population:"120+ million",area:"377,975 km²",timezone:"JST (UTC+9)",code:"+81",fact:"Japan is an island country known for its advanced technology, rich history, traditional culture and beautiful natural landscapes."},
+{name:"France",flag:"🇫🇷",continent:"Europe",region:"Western Europe",capital:"Paris",language:"French",currency:"Euro (€)",population:"68+ million",area:"551,695 km²",timezone:"CET / CEST",code:"+33",fact:"France is famous for its art, history, architecture, food, fashion and diverse landscapes."},
+{name:"Brazil",flag:"🇧🇷",continent:"South America",region:"Eastern South America",capital:"Brasília",language:"Portuguese",currency:"Brazilian Real (R$)",population:"210+ million",area:"8.52 million km²",timezone:"Multiple time zones",code:"+55",fact:"Brazil is the largest country in South America and contains a large part of the Amazon rainforest and river basin."},
+{name:"Egypt",flag:"🇪🇬",continent:"Africa",region:"North Africa",capital:"Cairo",language:"Arabic",currency:"Egyptian Pound (E£)",population:"110+ million",area:"1.00 million km²",timezone:"EET (UTC+2)",code:"+20",fact:"Egypt is famous for the Nile River, ancient Egyptian civilization and the pyramids of Giza."},
+{name:"Australia",flag:"🇦🇺",continent:"Oceania",region:"Australasia",capital:"Canberra",language:"English is widely used",currency:"Australian Dollar (A$)",population:"26+ million",area:"7.69 million km²",timezone:"Multiple time zones",code:"+61",fact:"Australia is both a country and a continent-sized landmass known for unique wildlife and varied landscapes."},
+{name:"Canada",flag:"🇨🇦",continent:"North America",region:"Northern North America",capital:"Ottawa",language:"English and French",currency:"Canadian Dollar (C$)",population:"40+ million",area:"9.98 million km²",timezone:"Multiple time zones",code:"+1",fact:"Canada is known for its vast landscapes, forests, lakes, mountains and Arctic regions."},
+{name:"United States",flag:"🇺🇸",continent:"North America",region:"North America",capital:"Washington, D.C.",language:"English is widely used",currency:"United States Dollar ($)",population:"340+ million",area:"9.83 million km²",timezone:"Multiple time zones",code:"+1",fact:"The United States contains a wide range of climates and landscapes, from Arctic Alaska to tropical Hawaii."},
+{name:"Greece",flag:"🇬🇷",continent:"Europe",region:"Southeastern Europe",capital:"Athens",language:"Greek",currency:"Euro (€)",population:"10+ million",area:"131,957 km²",timezone:"EET (UTC+2)",code:"+30",fact:"Ancient Greece had a major influence on philosophy, science, art, mathematics and political ideas."},
+{name:"South Africa",flag:"🇿🇦",continent:"Africa",region:"Southern Africa",capital:"Pretoria / Cape Town / Bloemfontein",language:"Multiple official languages",currency:"South African Rand (R)",population:"60+ million",area:"1.22 million km²",timezone:"SAST (UTC+2)",code:"+27",fact:"South Africa has exceptional biodiversity, varied landscapes and a rich cultural history."},
+{name:"United Kingdom",flag:"🇬🇧",continent:"Europe",region:"Northwestern Europe",capital:"London",language:"English",currency:"Pound Sterling (£)",population:"68+ million",area:"243,610 km²",timezone:"GMT / BST",code:"+44",fact:"The United Kingdom is made up of four constituent countries and has a long history of global cultural influence."},
+{name:"Germany",flag:"🇩🇪",continent:"Europe",region:"Central Europe",capital:"Berlin",language:"German",currency:"Euro (€)",population:"84+ million",area:"357,022 km²",timezone:"CET / CEST",code:"+49",fact:"Germany is known for engineering, science, industry, history and cultural traditions."},
+{name:"Italy",flag:"🇮🇹",continent:"Europe",region:"Southern Europe",capital:"Rome",language:"Italian",currency:"Euro (€)",population:"58+ million",area:"301,340 km²",timezone:"CET / CEST",code:"+39",fact:"Italy is famous for ancient Roman history, art, architecture, food and fashion."},
+{name:"China",flag:"🇨🇳",continent:"Asia",region:"East Asia",capital:"Beijing",language:"Mandarin Chinese",currency:"Renminbi / Yuan (¥)",population:"1.4+ billion",area:"9.60 million km²",timezone:"China Standard Time (UTC+8)",code:"+86",fact:"China has one of the world's oldest continuous civilizations and a wide variety of landscapes."},
+{name:"United Arab Emirates",flag:"🇦🇪",continent:"Asia",region:"Western Asia",capital:"Abu Dhabi",language:"Arabic",currency:"UAE Dirham (د.إ)",population:"10+ million",area:"83,600 km²",timezone:"GST (UTC+4)",code:"+971",fact:"The United Arab Emirates is known for modern cities, desert landscapes, innovation and rapid development."}
+];
+
+function countryDetails(c){
+let text=`${c.flag} ${c.name}\n\n🌍 Continent: ${c.continent}\n📍 Region: ${c.region}\n🏛️ Capital: ${c.capital}\n🗣️ Language(s): ${c.language}\n💰 Currency: ${c.currency}\n👥 Population: ${c.population}\n📐 Area: ${c.area}\n🕒 Timezone: ${c.timezone}\n📞 Calling Code: ${c.code}\n\n✨ About this country\n${c.fact}`;
+openInfo(`${c.flag} ${c.name}`,text);
+}
+
+function filterCountries(){
+let q=(document.getElementById("countrySearch")?.value||"").toLowerCase();
+let list=countryData.filter(c=>(c.name+" "+c.continent+" "+c.region+" "+c.capital+" "+c.language).toLowerCase().includes(q));
+let box=document.getElementById("countryGrid"); if(!box)return;
+box.innerHTML=list.length?list.map(c=>`<div class="card country-card" onclick='countryDetails(${JSON.stringify(c)})'><div class="icon">${c.flag}</div><h3>${c.name}</h3><p>${c.continent} • ${c.capital}</p><span class="badge">${c.region}</span><span class="tag">View Full Details →</span></div>`).join(""):`<div class="info-panel"><h2>🔎 No country found</h2><p>Try searching by country name, capital, continent or language.</p></div>`;
+}
+
+function searchKnowledge(){
+let q=document.getElementById("searchInput").value.toLowerCase();
+let data={space:"space",universe:"space",planet:"space",solar:"space",earth:"earth",ocean:"earth",continent:"earth",country:"countries",india:"countries",japan:"countries",math:"maths",maths:"maths",formula:"maths",algebra:"maths",grammar:"grammar",noun:"grammar",tense:"grammar",science:"science",physics:"science",chemistry:"science",biology:"science",history:"history",civilization:"history",car:"cars",engine:"cars",horsepower:"cars",bike:"bikes",motorcycle:"bikes",people:"people",einstein:"people",technology:"technology",ai:"technology",robot:"technology",programming:"technology",quiz:"quiz",calculator:"calculator",map:"map",continent:"map",achievement:"achievements",badge:"achievements",timeline:"timeline",future:"timeline",economy:"home",money:"home",psychology:"home",nature:"home"};
+for(let key in data){if(q.includes(key)){showPage(data[key]);addXP(2);return}}
+alert("This topic is not in the current database yet.");
+}
+function mathLevel(level){
+let content=document.getElementById("mathContent");
+if(level==="basic")content.innerHTML=`<div class="card"><h3>Numbers</h3><p>Counting, place value, basic arithmetic and number systems.</p><div class="formula">5,482 = 5 thousands + 4 hundreds + 8 tens + 2 ones</div></div><div class="card"><h3>Fractions</h3><p>A fraction represents part of a whole.</p><div class="formula">1/2 + 1/2 = 1</div></div><div class="card"><h3>Percentage</h3><div class="formula">Percentage = Part / Whole × 100</div></div>`;
+if(level==="middle")content.innerHTML=`<div class="card"><h3>Percentage</h3><div class="formula">Percentage = Part / Whole × 100</div></div><div class="card"><h3>Profit and Loss</h3><div class="formula">Profit = SP − CP<br><br>Loss = CP − SP</div></div><div class="card"><h3>Simple Interest</h3><div class="formula">SI = P × R × T / 100</div></div>`;
+if(level==="secondary")content.innerHTML=`<div class="card"><h3>Algebraic Identity</h3><div class="formula">(a+b)² = a² + 2ab + b²</div></div><div class="card"><h3>Pythagoras Theorem</h3><div class="formula">c² = a² + b²</div></div><div class="card"><h3>Probability</h3><div class="formula">P(E) = Favourable Outcomes / Total Outcomes</div></div>`;
+if(level==="advanced")content.innerHTML=`<div class="card"><h3>Quadratic Equation</h3><div class="formula">x = (-b ± √(b²−4ac)) / 2a</div></div><div class="card"><h3>Differentiation</h3><div class="formula">d/dx(xⁿ) = nxⁿ⁻¹</div></div><div class="card"><h3>Integration</h3><div class="formula">∫xⁿ dx = xⁿ⁺¹/(n+1) + C</div></div>`;
+addXP(3);
+}
+const quizBank = [
+{cat:"space",q:"Which planet is known as the Red Planet?",o:["Venus","Mars","Jupiter","Mercury"],a:1},
+{cat:"space",q:"What is at the centre of our Solar System?",o:["Earth","The Moon","The Sun","Mars"],a:2},
+{cat:"space",q:"What is a galaxy?",o:["A single planet","A huge collection of stars, gas and dust","A type of moon","A space station"],a:1},
+{cat:"space",q:"Which is the largest planet in our Solar System?",o:["Earth","Saturn","Jupiter","Neptune"],a:2},
+{cat:"space",q:"What force keeps planets in orbit around the Sun?",o:["Friction","Gravity","Magnetism","Sound"],a:1},
+{cat:"science",q:"What is the basic unit of life?",o:["Atom","Cell","Organ","Tissue"],a:1},
+{cat:"science",q:"Which gas do humans need for respiration?",o:["Oxygen","Carbon dioxide","Hydrogen","Helium"],a:0},
+{cat:"science",q:"What is H₂O commonly known as?",o:["Salt","Water","Oxygen","Hydrogen"],a:1},
+{cat:"science",q:"Which organ pumps blood around the human body?",o:["Lungs","Brain","Heart","Kidney"],a:2},
+{cat:"science",q:"What is the SI unit of force?",o:["Joule","Watt","Newton","Pascal"],a:2},
+{cat:"maths",q:"What is 12 × 8?",o:["86","96","108","88"],a:1},
+{cat:"maths",q:"What is the square root of 144?",o:["10","11","12","14"],a:2},
+{cat:"maths",q:"What is the formula for the area of a rectangle?",o:["2(l+b)","l × b","a²","½bh"],a:1},
+{cat:"maths",q:"What is 25% of 200?",o:["25","40","50","75"],a:2},
+{cat:"maths",q:"If x + 7 = 15, what is x?",o:["7","8","9","22"],a:1},
+{cat:"gk",q:"What is the capital of India?",o:["Mumbai","New Delhi","Kolkata","Chennai"],a:1},
+{cat:"gk",q:"Which is the largest ocean on Earth?",o:["Atlantic Ocean","Indian Ocean","Pacific Ocean","Arctic Ocean"],a:2},
+{cat:"gk",q:"How many continents are commonly recognised?",o:["5","6","7","8"],a:2},
+{cat:"gk",q:"Which is the longest river in India?",o:["Ganga","Yamuna","Godavari","Narmada"],a:0},
+{cat:"gk",q:"Which animal is known as the 'Ship of the Desert'?",o:["Horse","Camel","Elephant","Yak"],a:1},
+{cat:"history",q:"Which ancient civilisation developed along the Indus River region?",o:["Indus Valley Civilization","Roman Civilization","Viking Civilization","Maya Civilization"],a:0},
+{cat:"history",q:"The Great Pyramid of Giza is in which country?",o:["India","Egypt","Greece","Mexico"],a:1},
+{cat:"history",q:"Who is widely known as the Father of the Indian Constitution?",o:["Mahatma Gandhi","B. R. Ambedkar","Jawaharlal Nehru","Sardar Patel"],a:1},
+{cat:"history",q:"The Olympic Games originated in ancient which civilisation?",o:["Greek","Egyptian","Roman","Chinese"],a:0},
+{cat:"history",q:"What is history mainly the study of?",o:["Future predictions","Past events and human societies","Only mathematics","Only geography"],a:1},
+{cat:"gk",q:"Which instrument is used to measure temperature?",o:["Barometer","Thermometer","Ammeter","Compass"],a:1},
+{cat:"gk",q:"Which is the fastest land animal?",o:["Lion","Cheetah","Horse","Tiger"],a:1},
+{cat:"science",q:"Which part of a plant usually absorbs water from soil?",o:["Flower","Leaf","Root","Fruit"],a:2},
+{cat:"science",q:"What is the process by which plants make food using sunlight?",o:["Respiration","Photosynthesis","Digestion","Fermentation"],a:1},
+{cat:"space",q:"What is Earth's natural satellite?",o:["The Sun","The Moon","Mars","Venus"],a:1},
+{cat:"space",q:"What do we call a rock from space that reaches Earth's surface?",o:["Meteorite","Cloud","Comet tail","Nebula"],a:0},
+{cat:"maths",q:"What is 15% of 100?",o:["5","10","15","20"],a:2},
+{cat:"maths",q:"What is the perimeter of a square with side 5 cm?",o:["10 cm","15 cm","20 cm","25 cm"],a:2},
+{cat:"history",q:"Which invention made it possible to produce books much more quickly in Europe?",o:["Printing press","Steam engine","Telephone","Compass"],a:0},
+{cat:"history",q:"The Roman Empire was centred around which sea?",o:["Red Sea","Mediterranean Sea","Arabian Sea","Baltic Sea"],a:1}
+];
+let currentQuiz=[], quizIndex=0, quizScore=0, quizAnswered=false;
+function startQuiz(category){
+currentQuiz = category==="all" ? [...quizBank] : quizBank.filter(x=>x.cat===category);
+currentQuiz.sort(()=>Math.random()-0.5);
+quizIndex=0; quizScore=0; quizAnswered=false;
+document.getElementById("quizStats").innerText="Question 1 of "+currentQuiz.length+" • Score: 0";
+document.getElementById("result").innerText="";
+document.getElementById("nextQuiz").style.display="none";
+showQuizQuestion();
+}
+function showQuizQuestion(){
+if(!currentQuiz.length)return;
+let item=currentQuiz[quizIndex];
+quizAnswered=false;
+document.getElementById("quizQuestion").innerHTML="<h2>"+item.q+"</h2>";
+let box=document.getElementById("quizOptions");
+box.innerHTML="";
+item.o.forEach((option,i)=>{
+let b=document.createElement("button");
+b.className="option";
+b.innerText=String.fromCharCode(65+i)+". "+option;
+b.onclick=()=>checkQuizAnswer(i);
+box.appendChild(b);
+});
+document.getElementById("quizStats").innerText="Question "+(quizIndex+1)+" of "+currentQuiz.length+" • Score: "+quizScore;
+let progress=document.getElementById("quizProgress"); if(progress)progress.style.width=((quizIndex/currentQuiz.length)*100)+"%";
+}
+function checkQuizAnswer(choice){
+if(quizAnswered)return;
+quizAnswered=true;
+answeredQuestions++;
+localStorage.setItem("exploreAnsweredQuestions",answeredQuestions);
+updateDashboard();
+let item=currentQuiz[quizIndex];
+let buttons=document.querySelectorAll("#quizOptions .option");
+buttons.forEach((b,i)=>{b.disabled=true;if(i===item.a)b.style.borderColor="#4dff9a";if(i===choice&&choice!==item.a)b.style.borderColor="#ff5577"});
+let r=document.getElementById("result");
+if(choice===item.a){quizScore++;r.innerText="✅ Correct! +10 XP";r.style.color="#4dff9a";addXP(10)}
+else{r.innerText="❌ Not quite! The correct answer was: "+item.o[item.a];r.style.color="#ff5577"}
+document.getElementById("quizStats").innerText="Question "+(quizIndex+1)+" of "+currentQuiz.length+" • Score: "+quizScore;
+let progress=document.getElementById("quizProgress"); if(progress)progress.style.width=((quizIndex/currentQuiz.length)*100)+"%";
+document.getElementById("nextQuiz").style.display="inline-block";
+}
+function nextQuizQuestion(){
+quizIndex++;
+if(quizIndex>=currentQuiz.length){
+document.getElementById("quizQuestion").innerHTML="<h2>🎉 Quiz Complete!</h2><p style='margin-top:12px;color:#b9c5d9'>You scored <b>"+quizScore+"</b> out of <b>"+currentQuiz.length+"</b>.</p>";
+document.getElementById("quizOptions").innerHTML="";
+document.getElementById("result").innerText=quizScore===currentQuiz.length?"🏆 Perfect Score! You are a Knowledge Master!":"🌟 Great effort! Try again to beat your score.";
+document.getElementById("nextQuiz").style.display="none";
+let progress=document.getElementById("quizProgress"); if(progress)progress.style.width="100%";
+return;
+}
+document.getElementById("result").innerText="";
+document.getElementById("nextQuiz").style.display="none";
+showQuizQuestion();
+}
+function answer(correct){if(correct){startQuiz("space")}else{document.getElementById("result").innerText="❌ Try again!"}}
+function add(v){document.getElementById("display").value+=v}
+function clearCalc(){document.getElementById("display").value=""}
+function calculate(){let d=document.getElementById("display");try{d.value=Function("return "+d.value)();addXP(1)}catch{d.value="Error"}}
+document.getElementById("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter")searchKnowledge()});
+document.getElementById("modal").addEventListener("click",e=>{if(e.target===e.currentTarget)closeInfo()});
+loadSavedSettings();
+filterCountries();
+updateDashboard();
+renderFavorites();
+</script>
+</body>
+</html>
